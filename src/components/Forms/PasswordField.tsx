@@ -39,7 +39,6 @@ export default function PasswordField({
       InputProps={{
         style: {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.background.paper,
         },
         endAdornment: (
           <InputAdornment position="end">
