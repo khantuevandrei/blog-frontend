@@ -12,7 +12,10 @@ export default function ThemeButton() {
     >
       <IconButton
         onClick={toggleTheme}
-        sx={{ color: theme.palette.text.primary }}
+        sx={{
+          color: theme.palette.text.primary,
+          height: "fit-content",
+        }}
       >
         {isDarkMode ? <LightMode /> : <DarkMode />}
       </IconButton>
