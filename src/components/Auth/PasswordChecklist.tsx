@@ -32,7 +32,13 @@ export default function PasswordChecklist({
   ];
 
   return (
-    <Collapse in={Boolean(pass) || Boolean(confirmPass)} timeout={300}>
+    <Collapse
+      in={
+        !Object.values(validations).every(Boolean) &&
+        (Boolean(pass) || Boolean(confirmPass))
+      }
+      timeout={300}
+    >
       <ProgressBar validations={validations} />
       <List dense sx={{ mt: 1 }}>
         {items.map((item) => (

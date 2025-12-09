@@ -26,7 +26,10 @@ export default function UsernameChecklist({
   ];
 
   return (
-    <Collapse in={Boolean(username)} timeout={300}>
+    <Collapse
+      in={Boolean(username) && !Object.values(validations).every(Boolean)}
+      timeout={300}
+    >
       <ProgressBar validations={validations} />
       <List dense sx={{ mt: 1 }}>
         {items.map((item) => (
