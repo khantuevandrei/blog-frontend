@@ -1,6 +1,9 @@
 import { Box, Typography, useTheme } from "@mui/material";
+import DefaultButton from "../../components/general/DefaultButton";
+import { useNavigate } from "react-router";
 
 export default function Error({ code = 404, message = "Page not found" }) {
+  const navigate = useNavigate();
   const theme = useTheme();
 
   return (
@@ -32,7 +35,9 @@ export default function Error({ code = 404, message = "Page not found" }) {
       >
         {message}
       </Typography>
-      <Box></Box>
+      <Box>
+        <DefaultButton name="Home" onClick={() => navigate("/")} />
+      </Box>
     </Box>
   );
 }
