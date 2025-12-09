@@ -4,7 +4,7 @@ import Error from "../features/Error/Error";
 const routes = [
   {
     path: "/",
-    elements: <App />,
+    element: <App />,
     children: [
       {
         path: "*",
