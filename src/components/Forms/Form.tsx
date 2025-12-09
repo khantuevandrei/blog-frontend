@@ -36,7 +36,7 @@ export default function Form({ width, name, onSubmit, children }: FormProps) {
           position: "relative",
         }}
       >
-        <Typography variant="h5" mb={2} sx={{ fontWeight: 500 }}>
+        <Typography variant="h5" pb={2} sx={{ fontWeight: 500 }}>
           {name}
         </Typography>
         <Box component="form" onSubmit={onSubmit}>
