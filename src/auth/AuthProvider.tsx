@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import AuthContext from "./AuthContext";
 import type { AuthContextType } from "./AuthContext";
-import type { User } from "../types/User";
+import type { User } from "./User";
 
 interface AuthProviderProps {
   children: ReactNode;
