@@ -2,7 +2,6 @@ import { Box, useTheme } from "@mui/material";
 import { useAuth } from "../../auth/useAuth";
 import HeaderLogo from "../../components/Header/HeaderLogo";
 import ThemeButton from "../../components/Header/ThemeButton";
-import UserButton from "../../components/Header/UserButton";
 import LogoutButton from "../../components/Header/LogoutButton";
 import HeaderLink from "../../components/Header/HeaderLink";
 
@@ -51,14 +50,13 @@ export default function Header() {
           [theme.breakpoints.down("sm")]: {
             gridRow: "1/2",
             gridColumn: "2/3",
-            columnGap: 0,
           },
         }}
       >
         <ThemeButton />
         {user ? (
           <>
-            <UserButton />
+            <HeaderLink title={user.username} nav="/posts/all" />
             <LogoutButton />
           </>
         ) : (
