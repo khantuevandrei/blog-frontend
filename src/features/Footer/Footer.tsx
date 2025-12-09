@@ -15,7 +15,7 @@ export default function Footer() {
       }}
     >
       <Typography variant="body2">
-        Blog API for Authors. For demonstration purposes only.
+        Blog API. For demonstration purposes only.
       </Typography>
     </Box>
   );
