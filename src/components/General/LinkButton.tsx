@@ -1,11 +1,12 @@
 import { Button, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+
 interface LinkButtonProps {
   name: string;
   to: string;
 }
 
-export default function DefaultButton({ name, to }: LinkButtonProps) {
+export default function LinkButton({ name, to }: LinkButtonProps) {
   const theme = useTheme();
 
   return (
