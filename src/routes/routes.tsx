@@ -2,6 +2,7 @@ import App from "../App";
 import Error from "../features/Error/Error";
 import Login from "../features/Login/Login";
 import Register from "../features/Register/Register";
+import Profile from "../features/Profile/Profile";
 
 const routes = [
   {
@@ -16,6 +17,10 @@ const routes = [
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "*",
