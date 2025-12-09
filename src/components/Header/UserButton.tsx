@@ -26,6 +26,7 @@ export default function UserButton() {
           textDecoration: "none",
           color: theme.palette.primary.main,
           fontWeight: 600,
+          "&:hover": { color: theme.palette.primary.light },
         }}
       >
         {user.username}
