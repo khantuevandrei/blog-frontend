@@ -56,7 +56,7 @@ export default function Header() {
         <ThemeButton />
         {user ? (
           <>
-            <HeaderLink title={user.username} nav="/posts/all" />
+            <HeaderLink title={user.username} nav="/profile" />
             <LogoutButton />
           </>
         ) : (
