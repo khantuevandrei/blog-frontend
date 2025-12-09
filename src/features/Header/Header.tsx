@@ -19,7 +19,8 @@ export default function Header() {
         alignItems: "center",
         width: "100%",
         mx: "auto",
-        px: 1,
+        px: 2,
+        py: 1,
         bgcolor: theme.palette.background.paper,
         [theme.breakpoints.down("sm")]: {
           gridTemplateColumns: "1fr 1fr",
@@ -45,6 +46,7 @@ export default function Header() {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
+          alignItems: "center",
           columnGap: 1,
           [theme.breakpoints.down("sm")]: {
             gridRow: "1/2",
