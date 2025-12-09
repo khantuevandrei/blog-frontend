@@ -21,18 +21,34 @@ export default function Header() {
         mx: "auto",
         p: 1,
         bgcolor: theme.palette.background.paper,
+        [theme.breakpoints.down("sm")]: {
+          gridTemplateColumns: "1fr 1fr",
+        },
       }}
     >
       <HeaderLogo />
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <HeaderLink title="All posts" nav="/posts/all" />
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 1,
+          [theme.breakpoints.down("sm")]: {
+            gridColumn: "1/3",
+          },
+        }}
+      >
+        <HeaderLink title="View posts" nav="/posts/all" />
         {user && <HeaderLink title="My posts" nav="/posts/my" />}
       </Box>
       <Box
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          flexWrap: "wrap",
+          [theme.breakpoints.down("sm")]: {
+            gridRow: "1/2",
+            gridColumn: "2/3",
+          },
         }}
       >
         <ThemeButton />
