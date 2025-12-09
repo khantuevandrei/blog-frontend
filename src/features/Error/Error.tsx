@@ -1,51 +1,27 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import DefaultButton from "../../components/General/DefaultButton";
-import { useNavigate } from "react-router-dom";
+import { useRouteError, isRouteErrorResponse } from "react-router-dom";
+import ErrorLayout from "../../components/General/ErrorLayout";
 
 interface ErrorProps {
-  code: number;
-  message: string;
+  code?: number;
+  message?: string;
 }
 
-export default function Error({
-  code = 404,
-  message = "Page not found",
-}: ErrorProps) {
-  const navigate = useNavigate();
-  const theme = useTheme();
+export default function Error({ code, message }: ErrorProps) {
+  const routeError = useRouteError();
 
+  // Triggered via router errorElement
+  if (routeError) {
+    if (isRouteErrorResponse(routeError)) {
+      return (
+        <ErrorLayout code={routeError.status} message={routeError.statusText} />
+      );
+    }
+
+    return <ErrorLayout code={500} message="Something went wrong" />;
+  }
+
+  // If used manually
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        px: 2,
-      }}
-    >
-      <Typography
-        variant="h1"
-        component="h1"
-        sx={{
-          fontSize: 100,
-          fontWeight: 600,
-          color: theme.palette.text.primary,
-        }}
-      >
-        {code}
-      </Typography>
-      <Typography
-        variant="h5"
-        sx={{ mb: 3, color: theme.palette.text.primary }}
-      >
-        {message}
-      </Typography>
-      <Box>
-        <DefaultButton name="Home" onClick={() => navigate("/")} />
-      </Box>
-    </Box>
+    <ErrorLayout code={code ?? 404} message={message ?? "Page not found"} />
   );
 }
