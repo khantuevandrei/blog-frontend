@@ -19,6 +19,10 @@ export default function Form({ width, name, onSubmit, children }: FormProps) {
         alignItems: "center",
         flexGrow: 1,
         width: "100%",
+        py: 4,
+        [theme.breakpoints.down("sm")]: {
+          py: 2,
+        },
       }}
     >
       <Paper
