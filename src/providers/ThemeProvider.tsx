@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
-import { lightTheme, darkTheme } from "./theme";
-import ThemeContext from "./ThemeContext";
+import { lightTheme, darkTheme } from "../theme/theme";
+import ThemeContext from "../context/ThemeContext";
 
 export default function ThemeProvider({
   children,

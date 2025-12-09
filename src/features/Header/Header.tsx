@@ -1,5 +1,5 @@
 import { Box, useTheme } from "@mui/material";
-import { useAuth } from "../../auth/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import HeaderLogo from "../../components/Header/HeaderLogo";
 import ThemeButton from "../../components/Header/ThemeButton";
 import LogoutButton from "../../components/Header/LogoutButton";

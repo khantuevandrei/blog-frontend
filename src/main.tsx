@@ -8,8 +8,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import routes from "./routes/routes.tsx";
-import ThemeProvider from "./theme/ThemeProvider.tsx";
-import { AuthProvider } from "./auth/AuthProvider.tsx";
+import ThemeProvider from "./providers/ThemeProvider.tsx";
+import { AuthProvider } from "./providers/AuthProvider.tsx";
 
 const router = createBrowserRouter(routes);
 

@@ -1,5 +1,5 @@
 import { useTheme, Tooltip, IconButton } from "@mui/material";
-import useThemeMode from "../../theme/useThemeMode";
+import useThemeMode from "../../hooks/useThemeMode";
 import { LightMode, DarkMode } from "@mui/icons-material";
 
 export default function ThemeButton() {
