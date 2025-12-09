@@ -15,7 +15,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -34,17 +34,18 @@ export default function Register() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setError(null);
-    setLoading(true);
 
+    // Validation errors are present
     if (
       Object.values(usernameValidations).some((v) => !v) ||
       Object.values(passwordValidations).some((v) => !v)
     ) {
-      setLoading(false);
       setError("Please fix validation errors");
       return;
     }
+
+    setError(null);
+    setLoading(true);
 
     try {
       const response = await fetch(
