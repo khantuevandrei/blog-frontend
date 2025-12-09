@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import DefaultButton from "../../components/general/DefaultButton";
-import { useNavigate } from "react-router";
+import DefaultButton from "../../components/General/DefaultButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Error({ code = 404, message = "Page not found" }) {
   const navigate = useNavigate();
