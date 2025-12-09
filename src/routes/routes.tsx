@@ -1,6 +1,7 @@
 import App from "../App";
 import Error from "../features/Error/Error";
 import Login from "../features/Login/Login";
+import Register from "../features/Register/Register";
 
 const routes = [
   {
@@ -11,6 +12,10 @@ const routes = [
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "*",
