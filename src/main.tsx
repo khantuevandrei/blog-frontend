@@ -7,15 +7,18 @@ import "@fontsource/poppins/700.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import ThemeProvider from "./theme/ThemeProvider.tsx";
 import routes from "./routes/routes.tsx";
+import ThemeProvider from "./theme/ThemeProvider.tsx";
+import { AuthProvider } from "./auth/AuthProvider.tsx";
 
 const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   </StrictMode>
 );
