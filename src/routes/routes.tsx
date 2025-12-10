@@ -30,7 +30,11 @@ const routes = [
       },
       {
         path: "/posts/my",
-        element: <MyPosts />,
+        element: (
+          <RequireAuth>
+            <MyPosts />
+          </RequireAuth>
+        ),
       },
       {
         path: "*",
