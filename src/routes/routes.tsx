@@ -3,6 +3,7 @@ import Error from "../features/Error/Error";
 import Login from "../features/Login/Login";
 import Register from "../features/Register/Register";
 import Profile from "../features/Profile/Profile";
+import RequireAuth from "../components/RouteWrappers/RequireAuth";
 
 const routes = [
   {
@@ -20,7 +21,11 @@ const routes = [
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <RequireAuth>
+            <Profile />
+          </RequireAuth>
+        ),
       },
       {
         path: "*",
