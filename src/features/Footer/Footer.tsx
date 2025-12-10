@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, alpha } from "@mui/material";
 
 export default function Footer() {
   const theme = useTheme();
@@ -7,11 +7,11 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        mt: "auto",
-        py: 2,
-        textAlign: "center",
-        color: theme.palette.text.primary,
-        bgcolor: theme.palette.background.paper,
+        display: "flex",
+        justifyContent: "center",
+        backdropFilter: "blur(24px)",
+        backgroundColor: alpha(theme.palette.background.default, 0.4),
+        py: 1,
       }}
     >
       <Typography variant="body2">
