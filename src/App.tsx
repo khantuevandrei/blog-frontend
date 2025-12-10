@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Outlet } from "react-router";
 import { Box, Container, useTheme } from "@mui/material";
 import LoadingOverlay from "./components/General/LoadingOverlay";
-import Header from "./features/Header/Header";
+import Toolbar from "./features/Toolbar/Toolbar";
 import Footer from "./features/Footer/Footer";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         background: theme.palette.background.gradient,
       }}
     >
-      <Header />
+      <Toolbar />
       <Suspense fallback={<LoadingOverlay />}>
         <Container
           component="main"
