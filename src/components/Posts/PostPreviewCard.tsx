@@ -24,7 +24,7 @@ export default function PostPreviewCard({ post }: PostPreviewCardProps) {
         boxShadow: 1,
         "&:hover": {
           boxShadow: 4,
-          bgcolor: theme.palette.background.default,
+          bgcolor: theme.palette.background.highlight,
         },
       }}
     >
