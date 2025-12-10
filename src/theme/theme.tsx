@@ -36,6 +36,7 @@ export const lightTheme = createTheme({
     background: {
       default: "#f9fafb",
       paper: "#ffffff",
+      highlight: "rgba(239, 240, 241, 1)",
       gradient: `
         radial-gradient(circle at 20% 25%, #6091faff, transparent 80%),
         radial-gradient(circle at 60% 70%, #f88ec8ff, transparent 80%)
@@ -98,6 +99,7 @@ export const darkTheme = createTheme({
     background: {
       default: "#111827",
       paper: "#1f2937",
+      highlight: "#232f3fff",
       gradient: `
         radial-gradient(circle at 20% 25%, rgba(96,165,250,0.25), transparent 80%),
         radial-gradient(circle at 65% 75%, rgba(249,168,212,0.22), transparent 80%)
