@@ -13,7 +13,7 @@ export default function PostPreviewCard({ post }: PostPreviewCardProps) {
   return (
     <ListItem
       component={Link}
-      to={`/${post.id}`}
+      to={`/posts/${post.id}`}
       key={post.id}
       sx={{
         display: "block",
