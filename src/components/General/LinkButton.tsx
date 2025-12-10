@@ -21,7 +21,7 @@ export default function LinkButton({ name, to }: LinkButtonProps) {
         textTransform: "none",
         fontWeight: 500,
         fontSize: 16,
-        height: 38,
+        maxHeight: 38,
         "&:hover": { bgcolor: theme.palette.primary.light },
         transition: "background 0.3s",
         flexGrow: 1,
