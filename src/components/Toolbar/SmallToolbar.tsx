@@ -58,7 +58,6 @@ export default function SmallToolbar() {
             <MenuItem>
               <Button
                 onClick={logout}
-                color="primary"
                 variant="contained"
                 fullWidth
                 sx={{ color: theme.palette.primary.contrastText }}
@@ -72,7 +71,6 @@ export default function SmallToolbar() {
                 <Button
                   component={Link}
                   to="/login"
-                  color="primary"
                   variant="outlined"
                   fullWidth
                   sx={{ color: theme.palette.text.primary }}
@@ -84,7 +82,6 @@ export default function SmallToolbar() {
                 <Button
                   component={Link}
                   to="/register"
-                  color="primary"
                   variant="contained"
                   fullWidth
                   sx={{ color: theme.palette.primary.contrastText }}

@@ -61,7 +61,6 @@ export default function NormalToolbar() {
         {user ? (
           <Button
             onClick={logout}
-            color="primary"
             variant="contained"
             size="medium"
             sx={{ color: theme.palette.primary.contrastText }}
@@ -73,7 +72,6 @@ export default function NormalToolbar() {
             <Button
               component={Link}
               to="/login"
-              color="primary"
               variant="text"
               size="medium"
               sx={{ color: theme.palette.text.primary }}
@@ -83,7 +81,6 @@ export default function NormalToolbar() {
             <Button
               component={Link}
               to="/register"
-              color="primary"
               variant="contained"
               size="medium"
               sx={{ color: theme.palette.primary.contrastText }}
