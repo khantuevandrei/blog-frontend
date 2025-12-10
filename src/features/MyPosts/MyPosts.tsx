@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import Error from "../Error/Error";
 import LoadingOverlay from "../../components/General/LoadingOverlay";
 import PostsPreviewHeader from "../../components/Posts/PostsPreviewHeader";
 import PostsPreviewList from "../../components/Posts/PostsPreviewList";
@@ -46,10 +45,6 @@ export default function MyPosts() {
 
     fetchPosts();
   }, [user, token]);
-
-  if (!user) {
-    return <Error code={401} message="Not logged in" />;
-  }
 
   if (loading) return <LoadingOverlay />;
 
