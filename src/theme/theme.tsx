@@ -40,6 +40,7 @@ export const lightTheme = createTheme({
         radial-gradient(circle at 20% 25%, #6091faff, transparent 80%),
         radial-gradient(circle at 60% 70%, #f88ec8ff, transparent 80%)
       `,
+      overlay: "rgba(255,255,255,0.1)",
     },
     text: {
       primary: "#111827",
@@ -101,6 +102,7 @@ export const darkTheme = createTheme({
         radial-gradient(circle at 20% 25%, rgba(96,165,250,0.25), transparent 80%),
         radial-gradient(circle at 65% 75%, rgba(249,168,212,0.22), transparent 80%)
       `,
+      overlay: "rgba(0,0,0,0.3)",
     },
     text: {
       primary: "#f9fafb",
