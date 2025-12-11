@@ -1,6 +1,5 @@
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 import {
   Box,
   CircularProgress,
@@ -8,12 +7,13 @@ import {
   CardContent,
   Typography,
   Stack,
-  Button,
   Divider,
 } from "@mui/material";
 import BackButton from "../../components/General/BackButton";
 import AlertMessage from "../../components/General/AlertMessage";
 import ConfirmDialog from "../../components/General/ConfirmDialog";
+import LinkButton from "../../components/General/LinkButton";
+import DefaultButton from "../../components/General/DefaultButton";
 
 export interface userInfoProps {
   id: number;
@@ -27,7 +27,12 @@ export default function Profile() {
   const { user, token, logout } = useAuth();
   const [userInfo, setUserInfo] = useState<userInfoProps | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<{ profile: boolean; delete: boolean }>(
+    {
+      profile: true,
+      delete: false,
+    }
+  );
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 
   // Fetch user by id
@@ -38,7 +43,7 @@ export default function Profile() {
         return;
       }
 
-      setLoading(true);
+      setLoading((prev) => ({ ...prev, profile: true }));
       setError(null);
 
       try {
@@ -63,7 +68,7 @@ export default function Profile() {
       } catch {
         setError("Network error");
       } finally {
-        setLoading(false);
+        setLoading((prev) => ({ ...prev, profile: false }));
       }
     }
 
@@ -84,7 +89,7 @@ export default function Profile() {
       return;
     }
 
-    setLoading(true);
+    setLoading((prev) => ({ ...prev, delete: true }));
     setError(null);
 
     try {
@@ -110,7 +115,7 @@ export default function Profile() {
     } catch {
       setError("Network error");
     } finally {
-      setLoading(false);
+      setLoading((prev) => ({ ...prev, delete: false }));
     }
   }
 
@@ -123,14 +128,13 @@ export default function Profile() {
         alignItems: "center",
       }}
     >
-      {loading ? (
+      {loading.profile ? (
         <CircularProgress sx={{ mb: 3 }} />
       ) : !userInfo ? (
         <Typography>No user data</Typography>
       ) : (
         <Box sx={{ flexGrow: 1, maxWidth: 400, position: "relative" }}>
           <BackButton nav="/" />
-
           <Card
             sx={{
               width: "100%",
@@ -173,25 +177,21 @@ export default function Profile() {
               </Stack>
               <Divider sx={{ my: 2 }} />
               <Stack spacing={1.5}>
-                <Button
-                  component={Link}
+                <LinkButton
+                  name="Update username"
                   to="/username"
                   variant="outlined"
-                  fullWidth
-                >
-                  Update Username
-                </Button>
-                <Button
-                  component={Link}
+                />
+                <LinkButton
+                  name="Update password"
                   to="/password"
                   variant="outlined"
-                  fullWidth
-                >
-                  Update Password
-                </Button>
-                <Button onClick={openConfirm} variant="contained" fullWidth>
-                  Delete Profile
-                </Button>
+                />
+                <DefaultButton
+                  name="Delete profile"
+                  onClick={openConfirm}
+                  disabled={loading.delete}
+                />
               </Stack>
             </CardContent>
             {error && <AlertMessage type={"error"} message={error} />}
