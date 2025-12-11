@@ -13,10 +13,6 @@ export default function FormButton({ name, disabled }: FormButtonProps) {
       disabled={disabled}
       fullWidth
       sx={{
-        bgcolor: "primary.main",
-        "&:hover": {
-          bgcolor: "primary.dark",
-        },
         mt: 2,
       }}
     >
