@@ -1,4 +1,4 @@
-import { useTheme, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 interface AuthInfoProps {
@@ -8,14 +8,12 @@ interface AuthInfoProps {
 }
 
 export default function AuthInfo({ desc, link, nav }: AuthInfoProps) {
-  const theme = useTheme();
-
   return (
     <Typography
       sx={{
         mt: 2,
         textAlign: "center",
-        color: theme.palette.text.secondary,
+        color: "text.secondary",
         fontSize: 14,
       }}
     >
@@ -24,11 +22,11 @@ export default function AuthInfo({ desc, link, nav }: AuthInfoProps) {
         component={Link}
         to={nav}
         sx={{
-          color: theme.palette.primary.main,
+          color: "primary.main",
           textDecoration: "none",
-          fontWeight: 600,
+          fontWeight: 500,
           "&:hover": {
-            color: theme.palette.primary.light,
+            color: "primary.dark",
           },
         }}
       >

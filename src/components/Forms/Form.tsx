@@ -17,7 +17,6 @@ export default function Form({ width, name, onSubmit, children }: FormProps) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        flexGrow: 1,
         width: "100%",
         py: 4,
         [theme.breakpoints.down("sm")]: {
@@ -31,12 +30,10 @@ export default function Form({ width, name, onSubmit, children }: FormProps) {
           p: 4,
           width: "100%",
           maxWidth: { width },
-          bgcolor: theme.palette.background.paper,
-          color: theme.palette.text.primary,
           position: "relative",
         }}
       >
-        <Typography variant="h5" pb={2} sx={{ fontWeight: 500 }}>
+        <Typography variant="h6" mb={2} sx={{ fontWeight: 500 }}>
           {name}
         </Typography>
         <Box component="form" onSubmit={onSubmit}>

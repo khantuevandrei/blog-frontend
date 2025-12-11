@@ -1,4 +1,4 @@
-import { TextField as Field, useTheme } from "@mui/material";
+import { TextField as Field } from "@mui/material";
 
 interface TextFieldProps {
   label: string;
@@ -15,28 +15,37 @@ export default function TextField({
   onChange,
   required = true,
 }: TextFieldProps) {
-  const theme = useTheme();
-
   return (
     <Field
       label={label}
       name={name}
       fullWidth
-      margin="normal"
+      margin="dense"
       value={value}
       onChange={onChange}
       required={required}
       variant="outlined"
+      sx={{
+        width: "100%",
+        "& .MuiInputBase-root": {
+          height: 48,
+          fontSize: 14,
+          paddingRight: "8px",
+        },
+        "& .MuiInputLabel-root": {
+          fontSize: 14,
+        },
+      }}
       InputLabelProps={{
-        style: { color: theme.palette.text.secondary },
+        style: { color: "text.secondary" },
       }}
       InputProps={{
         style: {
-          color: theme.palette.text.primary,
+          color: "text.primary",
         },
       }}
       FormHelperTextProps={{
-        style: { color: theme.palette.text.secondary },
+        style: { color: "text.secondary" },
       }}
     />
   );
