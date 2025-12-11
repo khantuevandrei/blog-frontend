@@ -14,12 +14,12 @@ export default function UpdateUsername() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [form, setForm] = useState<string>("");
+  const [form, setForm] = useState<{ username: string }>({ username: "" });
 
-  const usernameValidations = validateUsername(form);
+  const usernameValidations = validateUsername(form.username);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setForm(e.target.value.trim());
+    setForm({ username: e.target.value.trim() });
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -55,7 +55,7 @@ export default function UpdateUsername() {
             "Content-Type": "application/json",
             Authorization: `bearer ${token}`,
           },
-          body: JSON.stringify({ form }),
+          body: JSON.stringify(form),
         }
       );
 
@@ -66,7 +66,7 @@ export default function UpdateUsername() {
         return;
       }
 
-      setForm("");
+      setForm({ username: "" });
 
       setSuccess("Username updated");
 
@@ -84,10 +84,13 @@ export default function UpdateUsername() {
       <TextField
         label="New username"
         name="username"
-        value={form}
+        value={form.username}
         onChange={handleChange}
       />
-      <UsernameChecklist username={form} validations={usernameValidations} />
+      <UsernameChecklist
+        username={form.username}
+        validations={usernameValidations}
+      />
       <AlertMessage
         type={error ? "error" : "success"}
         message={error ? error : success}

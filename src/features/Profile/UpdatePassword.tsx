@@ -61,7 +61,7 @@ export default function UpdatePassword() {
             "Content-Type": "application/json",
             Authorization: `bearer ${token}`,
           },
-          body: JSON.stringify({ password: form.password }),
+          body: JSON.stringify(form),
         }
       );
 
