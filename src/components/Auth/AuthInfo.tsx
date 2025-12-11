@@ -28,6 +28,7 @@ export default function AuthInfo({ desc, link, nav }: AuthInfoProps) {
           "&:hover": {
             color: "primary.dark",
           },
+          fontSize: 14,
         }}
       >
         {link}
