@@ -3,6 +3,8 @@ import Error from "../features/Error/Error";
 import Login from "../features/Login/Login";
 import Register from "../features/Register/Register";
 import Profile from "../features/Profile/Profile";
+import UpdateUsername from "../features/Profile/UpdateUsername";
+import UpdatePassword from "../features/Profile/UpdatePassword";
 import MyPosts from "../features/MyPosts/MyPosts";
 import RequireAuth from "../components/RouteWrappers/RequireAuth";
 
@@ -25,6 +27,22 @@ const routes = [
         element: (
           <RequireAuth>
             <Profile />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/username",
+        element: (
+          <RequireAuth>
+            <UpdateUsername />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/password",
+        element: (
+          <RequireAuth>
+            <UpdatePassword />
           </RequireAuth>
         ),
       },
