@@ -11,6 +11,7 @@ import {
   Button,
   Divider,
 } from "@mui/material";
+import BackButton from "../../components/General/BackButton";
 import AlertMessage from "../../components/General/AlertMessage";
 import ConfirmDialog from "../../components/General/ConfirmDialog";
 
@@ -116,11 +117,10 @@ export default function Profile() {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
         flexGrow: 1,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {loading ? (
@@ -128,76 +128,75 @@ export default function Profile() {
       ) : !userInfo ? (
         <Typography>No user data</Typography>
       ) : (
-        <Card
-          sx={{
-            width: "100%",
-            maxWidth: 400,
-            mx: "auto",
-            p: 2,
-            borderRadius: 1,
-            boxShadow: 3,
-          }}
-        >
-          <CardContent>
-            <Typography variant="h6" fontWeight={600} textAlign="center">
-              Profile
-            </Typography>
-            <Divider sx={{ my: 2 }} />
-            <Stack spacing={1.5}>
-              <Stack direction="row" justifyContent="space-between">
-                <Typography fontWeight={500}>Username:</Typography>
-                <Typography>{userInfo.username}</Typography>
-              </Stack>
+        <Box sx={{ flexGrow: 1, maxWidth: 400, position: "relative" }}>
+          <BackButton nav="/" />
 
-              <Stack direction="row" justifyContent="space-between">
-                <Typography fontWeight={500}>Role:</Typography>
-                <Typography>{userInfo.role}</Typography>
+          <Card
+            sx={{
+              width: "100%",
+              mx: "auto",
+              p: 2,
+              borderRadius: 1,
+              boxShadow: 3,
+            }}
+          >
+            <CardContent>
+              <Typography variant="h6" fontWeight={600} textAlign="center">
+                Profile
+              </Typography>
+              <Divider sx={{ my: 2 }} />
+              <Stack spacing={1.5}>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography fontWeight={500}>Username:</Typography>
+                  <Typography>{userInfo.username}</Typography>
+                </Stack>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography fontWeight={500}>Role:</Typography>
+                  <Typography>{userInfo.role}</Typography>
+                </Stack>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography fontWeight={500}>Total Posts:</Typography>
+                  <Typography>{userInfo.post_count}</Typography>
+                </Stack>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography fontWeight={500}>Created:</Typography>
+                  <Typography>
+                    {new Date(userInfo.created_at).toLocaleString(undefined, {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </Typography>
+                </Stack>
               </Stack>
-
-              <Stack direction="row" justifyContent="space-between">
-                <Typography fontWeight={500}>Total Posts:</Typography>
-                <Typography>{userInfo.post_count}</Typography>
+              <Divider sx={{ my: 2 }} />
+              <Stack spacing={1.5}>
+                <Button
+                  component={Link}
+                  to="/username"
+                  variant="outlined"
+                  fullWidth
+                >
+                  Update Username
+                </Button>
+                <Button
+                  component={Link}
+                  to="/password"
+                  variant="outlined"
+                  fullWidth
+                >
+                  Update Password
+                </Button>
+                <Button onClick={openConfirm} variant="contained" fullWidth>
+                  Delete Profile
+                </Button>
               </Stack>
-
-              <Stack direction="row" justifyContent="space-between">
-                <Typography fontWeight={500}>Created:</Typography>
-                <Typography>
-                  {new Date(userInfo.created_at).toLocaleString(undefined, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </Typography>
-              </Stack>
-            </Stack>
-
-            <Divider sx={{ my: 2 }} />
-            <Stack spacing={1.5}>
-              <Button
-                component={Link}
-                to="/profile/update/username"
-                variant="outlined"
-                fullWidth
-              >
-                Update Username
-              </Button>
-              <Button
-                component={Link}
-                to="/profile/update/password"
-                variant="outlined"
-                fullWidth
-              >
-                Update Password
-              </Button>
-              <Button onClick={openConfirm} variant="contained" fullWidth>
-                Delete Profile
-              </Button>
-            </Stack>
-          </CardContent>
-          {error && <AlertMessage type={"error"} message={error} />}
-        </Card>
+            </CardContent>
+            {error && <AlertMessage type={"error"} message={error} />}
+          </Card>
+        </Box>
       )}
       <ConfirmDialog
         open={confirmOpen}
