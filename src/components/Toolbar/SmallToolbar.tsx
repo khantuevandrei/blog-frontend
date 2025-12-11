@@ -40,12 +40,12 @@ export default function SmallToolbar() {
               <CloseRounded />
             </IconButton>
           </Box>
-          <MenuItem component={Link} to="/posts/all">
+          <MenuItem component={Link} to="/all">
             View posts
           </MenuItem>
           {user && (
             <>
-              <MenuItem component={Link} to="/posts/my">
+              <MenuItem component={Link} to="/my">
                 My posts
               </MenuItem>
               <MenuItem component={Link} to="/profile">

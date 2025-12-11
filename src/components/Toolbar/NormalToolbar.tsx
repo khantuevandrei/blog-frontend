@@ -20,7 +20,7 @@ export default function NormalToolbar() {
         <Box sx={{ display: { xs: "none", md: "flex", gap: 2 } }}>
           <Button
             component={Link}
-            to="/posts/all"
+            to="/all"
             variant="text"
             size="medium"
             sx={{ color: theme.palette.text.primary }}
@@ -31,7 +31,7 @@ export default function NormalToolbar() {
             <>
               <Button
                 component={Link}
-                to="/posts/my"
+                to="/my"
                 variant="text"
                 size="medium"
                 sx={{ color: theme.palette.text.primary }}
