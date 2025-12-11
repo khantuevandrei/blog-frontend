@@ -38,15 +38,6 @@ export default function NormalToolbar() {
               >
                 My posts
               </Button>
-              <Button
-                component={Link}
-                to="/profile"
-                variant="text"
-                size="medium"
-                sx={{ color: theme.palette.text.primary }}
-              >
-                Profile
-              </Button>
             </>
           )}
         </Box>
@@ -59,14 +50,25 @@ export default function NormalToolbar() {
         }}
       >
         {user ? (
-          <Button
-            onClick={logout}
-            variant="contained"
-            size="medium"
-            sx={{ color: theme.palette.primary.contrastText }}
-          >
-            Logout
-          </Button>
+          <>
+            <Button
+              component={Link}
+              to="/profile"
+              variant="text"
+              size="medium"
+              sx={{ color: theme.palette.text.primary }}
+            >
+              Profile
+            </Button>
+            <Button
+              onClick={logout}
+              variant="contained"
+              size="medium"
+              sx={{ color: theme.palette.primary.contrastText }}
+            >
+              Logout
+            </Button>
+          </>
         ) : (
           <>
             <Button
