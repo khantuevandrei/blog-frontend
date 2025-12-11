@@ -2,7 +2,6 @@ import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import {
   Box,
-  CircularProgress,
   Card,
   CardContent,
   Typography,
@@ -14,6 +13,7 @@ import AlertMessage from "../../components/General/AlertMessage";
 import ConfirmDialog from "../../components/General/ConfirmDialog";
 import LinkButton from "../../components/General/LinkButton";
 import DefaultButton from "../../components/General/DefaultButton";
+import LoadingOverlay from "../../components/General/LoadingOverlay";
 
 export interface userInfoProps {
   id: number;
@@ -119,6 +119,8 @@ export default function Profile() {
     }
   }
 
+  if (loading.profile) return <LoadingOverlay />;
+
   return (
     <Box
       sx={{
@@ -128,9 +130,7 @@ export default function Profile() {
         alignItems: "center",
       }}
     >
-      {loading.profile ? (
-        <CircularProgress sx={{ mb: 3 }} />
-      ) : !userInfo ? (
+      {!userInfo ? (
         <Typography>No user data</Typography>
       ) : (
         <Box sx={{ flexGrow: 1, maxWidth: 400, position: "relative" }}>
