@@ -1,174 +1,115 @@
-import Form from "../../components/Forms/Form";
-import TextField from "../../components/Forms/TextField";
-import PasswordField from "../../components/Forms/PasswordField";
-import FormButton from "../../components/Forms/FormButton";
-import BackButton from "../../components/General/BackButton";
-import AlertMessage from "../../components/General/AlertMessage";
-import UsernameChecklist from "../../components/Auth/UsernameChecklist";
-import PasswordChecklist from "../../components/Auth/PasswordChecklist";
-import { validateUsername, validatePassword } from "../../utils/validations";
 import { useAuth } from "../../hooks/useAuth";
-import { useState } from "react";
-import { useTheme, Box } from "@mui/material";
-import type { ChangeEvent, FormEvent } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+import {
+  Box,
+  CircularProgress,
+  Card,
+  CardContent,
+  Typography,
+  Stack,
+  Button,
+  Divider,
+} from "@mui/material";
+import AlertMessage from "../../components/General/AlertMessage";
+import ConfirmDialog from "../../components/General/ConfirmDialog";
+
+export interface userInfoProps {
+  id: number;
+  username: string;
+  role: string;
+  created_at: string;
+  post_count: number;
+}
 
 export default function Profile() {
-  const theme = useTheme();
-  const { user, token, login } = useAuth();
-  const [error, setError] = useState<{
-    username: string | null;
-    password: string | null;
-  }>({
-    username: null,
-    password: null,
-  });
-  const [success, setSuccess] = useState<{
-    username: string | null;
-    password: string | null;
-  }>({
-    username: null,
-    password: null,
-  });
-  const [loading, setLoading] = useState<{
-    username: boolean;
-    password: boolean;
-  }>({
-    username: false,
-    password: false,
-  });
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const { user, token, logout } = useAuth();
+  const [userInfo, setUserInfo] = useState<userInfoProps | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 
-  const usernameValidations = validateUsername(form.username);
-  const passwordValidations = validatePassword(
-    form.password,
-    form.confirmPassword
-  );
+  // Fetch user by id
+  useEffect(() => {
+    async function getUserInfo() {
+      if (!user) {
+        setError("Not logged in");
+        return;
+      }
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setForm({ ...form, [e.target.name]: e.target.value.trim() });
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(
+          `https://blog-backend-production-16f8.up.railway.app/api/users/${user.id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setError(data.message);
+          return;
+        }
+
+        setUserInfo(data);
+      } catch {
+        setError("Network error");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getUserInfo();
+  }, [user]);
+
+  // Open dialog
+  function openConfirm() {
+    setConfirmOpen(true);
   }
 
-  async function handleSubmitUsername(e: FormEvent) {
-    e.preventDefault();
+  // Delete profile
+  async function handleDelete() {
+    setConfirmOpen(false);
 
-    // Safeguard against null values
     if (!user) {
-      setError((prev) => ({ ...prev, username: "Not logged in" }));
+      setError("Not logged in");
       return;
     }
 
-    if (!token) {
-      setError((prev) => ({ ...prev, username: "Token is missing" }));
-      return;
-    }
-
-    // Validation errors are present
-    if (Object.values(usernameValidations).some((v) => !v)) {
-      setError((prev) => ({
-        ...prev,
-        username: "Please fix validation errors",
-      }));
-      return;
-    }
-
-    setLoading((prev) => ({ ...prev, username: true }));
-    setError((prev) => ({ ...prev, username: null }));
-    setSuccess((prev) => ({ ...prev, username: null }));
+    setLoading(true);
+    setError(null);
 
     try {
       const response = await fetch(
         `https://blog-backend-production-16f8.up.railway.app/api/users/${user.id}`,
         {
-          method: "PUT",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `bearer ${token}`,
           },
-          body: JSON.stringify({ username: form.username }),
         }
       );
 
       const data = await response.json();
 
       if (!response.ok) {
-        setError((prev) => ({ ...prev, username: data.message }));
+        setError(data.message);
         return;
       }
 
-      setForm((prev) => ({ ...prev, username: "" }));
-
-      setSuccess((prev) => ({ ...prev, username: "Username updated" }));
-
-      login(token, data);
+      logout();
     } catch {
-      setError((prev) => ({ ...prev, username: "Network error" }));
+      setError("Network error");
     } finally {
-      setLoading((prev) => ({ ...prev, username: false }));
-    }
-  }
-
-  async function handleSubmitPassword(e: FormEvent) {
-    e.preventDefault();
-
-    // Safeguard against null values
-    if (!user) {
-      setError((prev) => ({ ...prev, username: "Not logged in" }));
-      return;
-    }
-
-    if (!token) {
-      setError((prev) => ({ ...prev, username: "Token is missing" }));
-      return;
-    }
-
-    // Validation errors are present
-    if (Object.values(passwordValidations).some((v) => !v)) {
-      setError((prev) => ({
-        ...prev,
-        password: "Please fix validation errors",
-      }));
-      return;
-    }
-
-    setLoading((prev) => ({ ...prev, password: true }));
-    setError((prev) => ({ ...prev, password: null }));
-    setSuccess((prev) => ({ ...prev, password: null }));
-
-    try {
-      const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/users/${user.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `bearer ${token}`,
-          },
-          body: JSON.stringify({ password: form.password }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError((prev) => ({ ...prev, password: data.message }));
-        return;
-      }
-
-      setForm((prev) => ({
-        ...prev,
-        password: "",
-        confirmPassword: "",
-      }));
-
-      setSuccess((prev) => ({ ...prev, password: "Password updated" }));
-    } catch {
-      setError((prev) => ({ ...prev, password: "Network error" }));
-    } finally {
-      setLoading((prev) => ({ ...prev, password: false }));
+      setLoading(false);
     }
   }
 
@@ -177,57 +118,94 @@ export default function Profile() {
       sx={{
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         justifyContent: "center",
         flexGrow: 1,
-        width: "100%",
-        [theme.breakpoints.down("sm")]: {
-          pt: 6,
-        },
       }}
     >
-      <Form width={400} name="Update username" onSubmit={handleSubmitUsername}>
-        <BackButton nav={"/"} />
-        <TextField
-          label="New username"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-        />
-        <UsernameChecklist
-          username={form.username}
-          validations={usernameValidations}
-        />
-        <AlertMessage
-          type={error.username ? "error" : "success"}
-          message={error.username ? error.username : success.username}
-        />
-        <FormButton name="Update" disabled={loading.username} />
-      </Form>
+      {loading ? (
+        <CircularProgress sx={{ mb: 3 }} />
+      ) : !userInfo ? (
+        <Typography>No user data</Typography>
+      ) : (
+        <Card
+          sx={{
+            width: "100%",
+            maxWidth: 400,
+            mx: "auto",
+            p: 2,
+            borderRadius: 1,
+            boxShadow: 3,
+          }}
+        >
+          <CardContent>
+            <Typography variant="h6" fontWeight={600} textAlign="center">
+              Profile
+            </Typography>
+            <Divider sx={{ my: 2 }} />
+            <Stack spacing={1.5}>
+              <Stack direction="row" justifyContent="space-between">
+                <Typography fontWeight={500}>Username:</Typography>
+                <Typography>{userInfo.username}</Typography>
+              </Stack>
 
-      <Form width={400} name="Update password" onSubmit={handleSubmitPassword}>
-        <PasswordField
-          label="New password"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-        />
-        <PasswordField
-          label="Confirm new password"
-          name="confirmPassword"
-          value={form.confirmPassword}
-          onChange={handleChange}
-        />
-        <PasswordChecklist
-          pass={form.password}
-          confirmPass={form.confirmPassword}
-          validations={passwordValidations}
-        />
-        <AlertMessage
-          type={error.password ? "error" : "success"}
-          message={error.password ? error.password : success.password}
-        />
-        <FormButton name="Update" disabled={loading.password} />
-      </Form>
+              <Stack direction="row" justifyContent="space-between">
+                <Typography fontWeight={500}>Role:</Typography>
+                <Typography>{userInfo.role}</Typography>
+              </Stack>
+
+              <Stack direction="row" justifyContent="space-between">
+                <Typography fontWeight={500}>Total Posts:</Typography>
+                <Typography>{userInfo.post_count}</Typography>
+              </Stack>
+
+              <Stack direction="row" justifyContent="space-between">
+                <Typography fontWeight={500}>Created:</Typography>
+                <Typography>
+                  {new Date(userInfo.created_at).toLocaleString(undefined, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Typography>
+              </Stack>
+            </Stack>
+
+            <Divider sx={{ my: 2 }} />
+            <Stack spacing={1.5}>
+              <Button
+                component={Link}
+                to="/profile/update/username"
+                variant="outlined"
+                fullWidth
+              >
+                Update Username
+              </Button>
+              <Button
+                component={Link}
+                to="/profile/update/password"
+                variant="outlined"
+                fullWidth
+              >
+                Update Password
+              </Button>
+              <Button onClick={openConfirm} variant="contained" fullWidth>
+                Delete Profile
+              </Button>
+            </Stack>
+          </CardContent>
+          {error && <AlertMessage type={"error"} message={error} />}
+        </Card>
+      )}
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Delete Profile"
+        text="Are you sure you want to delete your profile? This action cannot be undone."
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={handleDelete}
+      />
     </Box>
   );
 }
