@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Post } from "../../types/Post";
-import { Grid, Box, CircularProgress } from "@mui/material";
+import { Grid, Box, CircularProgress, Typography } from "@mui/material";
 import LoadingOverlay from "../../components/General/LoadingOverlay";
 import PostCard from "../../components/Posts/PostCard";
 import AlertMessage from "../../components/General/AlertMessage";
@@ -122,6 +122,20 @@ export default function AllPosts() {
 
   return (
     <Box>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          letterSpacing: 1,
+          color: "text.primary",
+          textTransform: "uppercase",
+          mt: 4,
+          textAlign: "center",
+        }}
+      >
+        All Posts
+      </Typography>
       <Grid
         container
         spacing={4}
