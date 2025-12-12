@@ -48,17 +48,28 @@ export default function SmallToolbar() {
               <CloseRounded />
             </IconButton>
           </Box>
-          <MenuItem component={Link} to="/" sx={getLinkStyle("/")}>
+          <MenuItem
+            component={Link}
+            to="/"
+            onClick={toggleDrawer}
+            sx={getLinkStyle("/")}
+          >
             View posts
           </MenuItem>
           {user && (
             <>
-              <MenuItem component={Link} to="/my" sx={getLinkStyle("/my")}>
+              <MenuItem
+                component={Link}
+                to="/my"
+                onClick={toggleDrawer}
+                sx={getLinkStyle("/my")}
+              >
                 My posts
               </MenuItem>
               <MenuItem
                 component={Link}
                 to="/create"
+                onClick={toggleDrawer}
                 sx={getLinkStyle("/create")}
               >
                 Create post
@@ -66,6 +77,7 @@ export default function SmallToolbar() {
               <MenuItem
                 component={Link}
                 to="/profile"
+                onClick={toggleDrawer}
                 sx={getLinkStyle("/profile")}
               >
                 Profile
@@ -75,7 +87,14 @@ export default function SmallToolbar() {
           <Divider sx={{ my: 3 }} />
           {user ? (
             <MenuItem>
-              <Button onClick={logout} variant="contained" fullWidth>
+              <Button
+                onClick={() => {
+                  logout();
+                  toggleDrawer();
+                }}
+                variant="contained"
+                fullWidth
+              >
                 Logout
               </Button>
             </MenuItem>
@@ -85,6 +104,7 @@ export default function SmallToolbar() {
                 <Button
                   component={Link}
                   to="/login"
+                  onClick={toggleDrawer}
                   variant="outlined"
                   fullWidth
                   sx={{ color: "text.primary" }}
@@ -96,6 +116,7 @@ export default function SmallToolbar() {
                 <Button
                   component={Link}
                   to="/register"
+                  onClick={toggleDrawer}
                   variant="contained"
                   fullWidth
                 >
