@@ -5,6 +5,7 @@ import Register from "../features/Register/Register";
 import Profile from "../features/Profile/Profile";
 import UpdateUsername from "../features/Profile/UpdateUsername";
 import UpdatePassword from "../features/Profile/UpdatePassword";
+import AllPosts from "../features/AllPosts/AllPosts";
 import MyPosts from "../features/MyPosts/MyPosts";
 import RequireAuth from "../components/RouteWrappers/RequireAuth";
 
@@ -14,6 +15,10 @@ const routes = [
     element: <App />,
     errorElement: <Error />,
     children: [
+      {
+        index: true,
+        element: <AllPosts />,
+      },
       {
         path: "/login",
         element: <Login />,
@@ -46,8 +51,9 @@ const routes = [
           </RequireAuth>
         ),
       },
+
       {
-        path: "/posts/my",
+        path: "/my",
         element: (
           <RequireAuth>
             <MyPosts />
