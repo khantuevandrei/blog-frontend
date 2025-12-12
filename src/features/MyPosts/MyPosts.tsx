@@ -22,7 +22,7 @@ export default function MyPosts() {
 
   // Load first posts on page load
   useEffect(() => {
-    async function fetchPosts() {
+    async function getPosts() {
       if (!user) return;
 
       setLoading((prev) => ({ ...prev, page: true }));
@@ -46,9 +46,8 @@ export default function MyPosts() {
 
         setPosts(data);
 
-        if (data.length < 10) {
-          setHasMore(false);
-        }
+        setHasMore(data.length === 10);
+        setOffset(data.length === 10 ? 10 : 0);
 
         if (data.length === 10) {
           setHasMore(true);
@@ -61,11 +60,11 @@ export default function MyPosts() {
       }
     }
 
-    fetchPosts();
+    getPosts();
   }, [user, token]);
 
   // Load next posts
-  const loadPosts = useCallback(async () => {
+  const loadMore = useCallback(async () => {
     if (!user) return;
 
     if (loading.posts || !hasMore) return;
@@ -77,7 +76,7 @@ export default function MyPosts() {
         `https://blog-backend-production-16f8.up.railway.app/api/users/${user.id}/posts?offset=${offset}`,
         {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          headers: { Authorization: `bearer ${token}` },
         }
       );
 
@@ -101,17 +100,17 @@ export default function MyPosts() {
     } finally {
       setLoading((prev) => ({ ...prev, posts: false }));
     }
-  }, [user, loading.posts, hasMore, offset]);
+  }, [user, token, loading.posts, hasMore, offset]);
 
   // Detect when user reaches the end of the page
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          loadPosts();
+          loadMore();
         }
       },
-      { threshold: 1 }
+      { threshold: 0 }
     );
 
     const element = loaderRef.current;
@@ -121,7 +120,7 @@ export default function MyPosts() {
     return () => {
       if (element) observer.unobserve(element);
     };
-  }, [loadPosts]);
+  }, [loadMore]);
 
   if (loading.page) return <LoadingOverlay />;
 
@@ -161,7 +160,7 @@ export default function MyPosts() {
       </Stack>
       <Box ref={loaderRef} sx={{ height: "50px" }} />
       {loading.posts && (
-        <CircularProgress sx={{ display: "block", mx: "auto", my: 3 }} />
+        <CircularProgress sx={{ display: "block", mx: "auto", mb: 4 }} />
       )}
       <AlertMessage type="error" message={error} />
     </Box>
