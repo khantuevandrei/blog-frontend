@@ -153,7 +153,15 @@ export default function MyPosts() {
       >
         My Posts
       </Typography>
-      <Stack spacing={4} my={4}>
+      <Stack
+        spacing={4}
+        my={4}
+        sx={{
+          alignItems: "center",
+          flexGrow: 1,
+          width: "100%",
+        }}
+      >
         {posts.map((post) => (
           <MyPostCard key={post.id} post={post} setPosts={setPosts} />
         ))}
