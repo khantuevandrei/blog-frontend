@@ -62,7 +62,7 @@ export default function AllPosts() {
   }, []);
 
   // Load next posts
-  const loadPosts = useCallback(async () => {
+  const loadMore = useCallback(async () => {
     if (loading.posts || !hasMore) return;
 
     setLoading((prev) => ({ ...prev, posts: true }));
@@ -103,10 +103,10 @@ export default function AllPosts() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          loadPosts();
+          loadMore();
         }
       },
-      { threshold: 1 }
+      { threshold: 0 }
     );
 
     const element = loaderRef.current;
@@ -116,7 +116,7 @@ export default function AllPosts() {
     return () => {
       if (element) observer.unobserve(element);
     };
-  }, [loadPosts]);
+  }, [loadMore]);
 
   if (loading.page) return <LoadingOverlay />;
 
@@ -154,7 +154,7 @@ export default function AllPosts() {
       </Grid>
       <Box ref={loaderRef} sx={{ height: "50px" }} />
       {loading.posts && (
-        <CircularProgress sx={{ display: "block", mx: "auto", my: 3 }} />
+        <CircularProgress sx={{ display: "block", mx: "auto", mb: 4 }} />
       )}
       <AlertMessage type="error" message={error} />
     </Box>
