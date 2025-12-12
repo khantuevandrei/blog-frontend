@@ -168,7 +168,7 @@ export default function MyPosts() {
       </Stack>
       <Box ref={loaderRef} sx={{ height: "50px" }} />
       {loading.posts && (
-        <CircularProgress sx={{ display: "block", mx: "auto", mb: 4 }} />
+        <CircularProgress sx={{ display: "block", mx: "auto", mb: 8 }} />
       )}
       <AlertMessage type="error" message={error} />
     </Box>
