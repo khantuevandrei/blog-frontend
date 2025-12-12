@@ -5,7 +5,6 @@ import {
   Divider,
   Button,
   IconButton,
-  useTheme,
 } from "@mui/material";
 import { Menu, CloseRounded } from "@mui/icons-material";
 import { useState } from "react";
@@ -14,7 +13,6 @@ import { Link } from "react-router";
 import ThemeButton from "./ThemeButton";
 
 export default function SmallToolbar() {
-  const theme = useTheme();
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
 
@@ -48,6 +46,9 @@ export default function SmallToolbar() {
               <MenuItem component={Link} to="/my">
                 My posts
               </MenuItem>
+              <MenuItem component={Link} to="/create">
+                Create post
+              </MenuItem>
               <MenuItem component={Link} to="/profile">
                 Profile
               </MenuItem>
@@ -56,12 +57,7 @@ export default function SmallToolbar() {
           <Divider sx={{ my: 3 }} />
           {user ? (
             <MenuItem>
-              <Button
-                onClick={logout}
-                variant="contained"
-                fullWidth
-                sx={{ color: theme.palette.primary.contrastText }}
-              >
+              <Button onClick={logout} variant="contained" fullWidth>
                 Logout
               </Button>
             </MenuItem>
@@ -73,7 +69,7 @@ export default function SmallToolbar() {
                   to="/login"
                   variant="outlined"
                   fullWidth
-                  sx={{ color: theme.palette.text.primary }}
+                  sx={{ color: "text.primary" }}
                 >
                   Login
                 </Button>
@@ -84,7 +80,6 @@ export default function SmallToolbar() {
                   to="/register"
                   variant="contained"
                   fullWidth
-                  sx={{ color: theme.palette.primary.contrastText }}
                 >
                   Register
                 </Button>

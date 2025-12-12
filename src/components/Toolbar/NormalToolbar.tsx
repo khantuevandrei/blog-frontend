@@ -1,10 +1,9 @@
 import { useAuth } from "../../hooks/useAuth";
-import { Box, Button, useTheme } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { Link } from "react-router";
 import ThemeButton from "./ThemeButton";
 
 export default function NormalToolbar() {
-  const theme = useTheme();
   const { user, logout } = useAuth();
 
   return (
@@ -23,7 +22,7 @@ export default function NormalToolbar() {
             to="/all"
             variant="text"
             size="medium"
-            sx={{ color: theme.palette.text.primary }}
+            sx={{ color: "text.primary" }}
           >
             View posts
           </Button>
@@ -34,9 +33,18 @@ export default function NormalToolbar() {
                 to="/my"
                 variant="text"
                 size="medium"
-                sx={{ color: theme.palette.text.primary }}
+                sx={{ color: "text.primary" }}
               >
                 My posts
+              </Button>
+              <Button
+                component={Link}
+                to="/create"
+                variant="text"
+                size="medium"
+                sx={{ color: "text.primary" }}
+              >
+                Create post
               </Button>
             </>
           )}
@@ -56,16 +64,11 @@ export default function NormalToolbar() {
               to="/profile"
               variant="text"
               size="medium"
-              sx={{ color: theme.palette.text.primary }}
+              sx={{ color: "text.primary" }}
             >
               Profile
             </Button>
-            <Button
-              onClick={logout}
-              variant="contained"
-              size="medium"
-              sx={{ color: theme.palette.primary.contrastText }}
-            >
+            <Button onClick={logout} variant="contained" size="medium">
               Logout
             </Button>
           </>
@@ -76,7 +79,7 @@ export default function NormalToolbar() {
               to="/login"
               variant="text"
               size="medium"
-              sx={{ color: theme.palette.text.primary }}
+              sx={{ color: "text.primary" }}
             >
               Login
             </Button>
@@ -85,7 +88,6 @@ export default function NormalToolbar() {
               to="/register"
               variant="contained"
               size="medium"
-              sx={{ color: theme.palette.primary.contrastText }}
             >
               Register
             </Button>
