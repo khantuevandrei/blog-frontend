@@ -25,3 +25,5 @@ export interface Post {
   comments: Comment[];
   total_comments: number;
 }
+
+export type Posts = Post[];
