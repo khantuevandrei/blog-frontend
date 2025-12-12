@@ -18,7 +18,7 @@ export default function Login() {
   const [form, setForm] = useState({ username: "", password: "" });
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value.trim() });
   }
 
   async function handleSubmit(e: FormEvent) {
