@@ -32,7 +32,7 @@ export default function NormalToolbar() {
             to="/"
             variant="text"
             size="medium"
-            sx={getLinkStyle("/all")}
+            sx={getLinkStyle("/")}
           >
             View posts
           </Button>
