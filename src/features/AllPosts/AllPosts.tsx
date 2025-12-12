@@ -121,7 +121,7 @@ export default function AllPosts() {
   if (loading.page) return <LoadingOverlay />;
 
   return (
-    <Box>
+    <Box sx={{ flexGrow: 1 }}>
       <Typography
         variant="h4"
         component="h1"
@@ -142,14 +142,14 @@ export default function AllPosts() {
         sx={{
           my: 4,
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "repeat(2,1fr)" },
+          gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
           gridAutoRows: "300px",
         }}
       >
         {posts.map((post) => (
-          <Box key={post.id}>
+          <Grid key={post.id}>
             <PostCard post={post} />
-          </Box>
+          </Grid>
         ))}
       </Grid>
       <Box ref={loaderRef} sx={{ height: "50px" }} />

@@ -29,7 +29,6 @@ export default function PostCard({ post }: PostCardProps) {
         flexDirection: "column",
         height: "100%",
         width: "100%",
-        maxWidth: 560,
       }}
     >
       <CardContent sx={{ flexGrow: 1 }}>
@@ -64,6 +63,7 @@ export default function PostCard({ post }: PostCardProps) {
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
             color: "text.primary",
+            flexGrow: 1,
           }}
         >
           {post.body}
