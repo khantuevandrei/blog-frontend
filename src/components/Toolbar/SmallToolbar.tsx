@@ -48,7 +48,7 @@ export default function SmallToolbar() {
               <CloseRounded />
             </IconButton>
           </Box>
-          <MenuItem component={Link} to="/all" sx={getLinkStyle("/all")}>
+          <MenuItem component={Link} to="/" sx={getLinkStyle("/all")}>
             View posts
           </MenuItem>
           {user && (

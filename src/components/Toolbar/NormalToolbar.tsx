@@ -29,7 +29,7 @@ export default function NormalToolbar() {
         <Box sx={{ display: { xs: "none", md: "flex", gap: 2 } }}>
           <Button
             component={Link}
-            to="/all"
+            to="/"
             variant="text"
             size="medium"
             sx={getLinkStyle("/all")}
