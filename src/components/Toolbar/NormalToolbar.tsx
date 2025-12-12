@@ -1,10 +1,19 @@
 import { useAuth } from "../../hooks/useAuth";
 import { Box, Button } from "@mui/material";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import ThemeButton from "./ThemeButton";
 
 export default function NormalToolbar() {
   const { user, logout } = useAuth();
+  const location = useLocation();
+
+  function getLinkStyle(path: string) {
+    const isActive = location.pathname === path;
+    return {
+      color: "text.primary",
+      bgcolor: isActive ? "action.selected" : "transparent",
+    };
+  }
 
   return (
     <>
@@ -22,7 +31,7 @@ export default function NormalToolbar() {
             to="/all"
             variant="text"
             size="medium"
-            sx={{ color: "text.primary" }}
+            sx={getLinkStyle("/all")}
           >
             View posts
           </Button>
@@ -33,7 +42,7 @@ export default function NormalToolbar() {
                 to="/my"
                 variant="text"
                 size="medium"
-                sx={{ color: "text.primary" }}
+                sx={getLinkStyle("/my")}
               >
                 My posts
               </Button>
@@ -42,7 +51,7 @@ export default function NormalToolbar() {
                 to="/create"
                 variant="text"
                 size="medium"
-                sx={{ color: "text.primary" }}
+                sx={getLinkStyle("/create")}
               >
                 Create post
               </Button>
@@ -64,7 +73,7 @@ export default function NormalToolbar() {
               to="/profile"
               variant="text"
               size="medium"
-              sx={{ color: "text.primary" }}
+              sx={getLinkStyle("/profile")}
             >
               Profile
             </Button>

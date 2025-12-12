@@ -9,12 +9,22 @@ import {
 import { Menu, CloseRounded } from "@mui/icons-material";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import ThemeButton from "./ThemeButton";
 
 export default function SmallToolbar() {
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  function getLinkStyle(path: string) {
+    const isActive = location.pathname === path;
+    return {
+      color: "text.primary",
+      bgcolor: isActive ? "action.selected" : "transparent",
+      width: "fit-content",
+    };
+  }
 
   function toggleDrawer() {
     setOpen(!open);
@@ -38,18 +48,26 @@ export default function SmallToolbar() {
               <CloseRounded />
             </IconButton>
           </Box>
-          <MenuItem component={Link} to="/all">
+          <MenuItem component={Link} to="/all" sx={getLinkStyle("/all")}>
             View posts
           </MenuItem>
           {user && (
             <>
-              <MenuItem component={Link} to="/my">
+              <MenuItem component={Link} to="/my" sx={getLinkStyle("/my")}>
                 My posts
               </MenuItem>
-              <MenuItem component={Link} to="/create">
+              <MenuItem
+                component={Link}
+                to="/create"
+                sx={getLinkStyle("/create")}
+              >
                 Create post
               </MenuItem>
-              <MenuItem component={Link} to="/profile">
+              <MenuItem
+                component={Link}
+                to="/profile"
+                sx={getLinkStyle("/profile")}
+              >
                 Profile
               </MenuItem>
             </>
