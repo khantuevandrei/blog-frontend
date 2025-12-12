@@ -9,6 +9,7 @@ import BodyField from "../../components/Forms/BodyField";
 import type { Post } from "../../types/Post";
 import LoadingOverlay from "../../components/General/LoadingOverlay";
 import BackButton from "../../components/General/BackButton";
+import Error from "../Error/Error";
 
 export default function EditPost() {
   const { postId } = useParams();
@@ -19,7 +20,10 @@ export default function EditPost() {
     title: "",
     body: "",
   });
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<{
+    status: number | null;
+    message: string | null;
+  }>({ status: null, message: null });
   const [loading, setLoading] = useState<{ page: boolean; update: boolean }>({
     page: false,
     update: false,
@@ -43,7 +47,10 @@ export default function EditPost() {
 
         if (!response.ok) {
           const errorData = await response.json();
-          setError(errorData.message || "Failed to load post");
+          setError({
+            status: errorData.status || response.status,
+            message: errorData.message || "Post not found",
+          });
           return;
         }
 
@@ -52,7 +59,7 @@ export default function EditPost() {
         setPost(data);
         setForm({ title: data.title, body: data.body });
       } catch {
-        setError("Network error");
+        setError({ status: 500, message: "Network error" });
       } finally {
         setLoading((prev) => ({ ...prev, page: false }));
       }
@@ -62,18 +69,21 @@ export default function EditPost() {
   }, [postId, token]);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value.trim() }));
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
   async function handleSubmit(e: FormEvent) {
     if (!post) return;
 
     e.preventDefault();
-    setError(null);
+    setError({ status: null, message: null });
     setLoading((prev) => ({ ...prev, update: true }));
 
-    if (!form.title || !form.body) {
-      setError("Both title and body are required");
+    if (!form.title.trim() || !form.body.trim()) {
+      setError((prev) => ({
+        ...prev,
+        message: "Both title and body are required",
+      }));
       return;
     }
 
@@ -93,19 +103,24 @@ export default function EditPost() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message);
+        setError((prev) => ({
+          ...prev,
+          message: data.message,
+        }));
         return;
       }
 
       navigate(`/posts/${postId}`);
     } catch {
-      setError("Network error");
+      setError({ status: 500, message: "Network error" });
     } finally {
       setLoading((prev) => ({ ...prev, update: false }));
     }
   }
 
   if (loading.page) return <LoadingOverlay />;
+  if (error.status && error.message)
+    return <Error code={error.status} message={error.message} />;
 
   return (
     <Form width={600} name="Edit post" onSubmit={handleSubmit}>
@@ -117,7 +132,7 @@ export default function EditPost() {
         onChange={handleChange}
       />
       <BodyField value={form.body} onChange={handleChange} />
-      <AlertMessage type="error" message={error} />
+      <AlertMessage type="error" message={error.message} />
       <FormButton name="Update" disabled={loading.update} />
     </Form>
   );
