@@ -7,6 +7,7 @@ import UpdateUsername from "../features/Profile/UpdateUsername";
 import UpdatePassword from "../features/Profile/UpdatePassword";
 import AllPosts from "../features/AllPosts/AllPosts";
 import MyPosts from "../features/MyPosts/MyPosts";
+import CreatePost from "../features/CreatePost/CreatePost";
 import RequireAuth from "../components/RouteWrappers/RequireAuth";
 
 const routes = [
@@ -51,12 +52,19 @@ const routes = [
           </RequireAuth>
         ),
       },
-
       {
         path: "/my",
         element: (
           <RequireAuth>
             <MyPosts />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/create",
+        element: (
+          <RequireAuth>
+            <CreatePost />
           </RequireAuth>
         ),
       },
