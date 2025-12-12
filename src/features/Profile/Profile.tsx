@@ -8,7 +8,6 @@ import {
   Stack,
   Divider,
 } from "@mui/material";
-import BackButton from "../../components/General/BackButton";
 import AlertMessage from "../../components/General/AlertMessage";
 import ConfirmDialog from "../../components/General/ConfirmDialog";
 import LinkButton from "../../components/General/LinkButton";
@@ -133,8 +132,7 @@ export default function Profile() {
       {!userInfo ? (
         <Typography>No user data</Typography>
       ) : (
-        <Box sx={{ flexGrow: 1, maxWidth: 400, position: "relative" }}>
-          <BackButton nav="/" />
+        <Box sx={{ flexGrow: 1, maxWidth: 400 }}>
           <Card
             sx={{
               width: "100%",
@@ -145,7 +143,7 @@ export default function Profile() {
             }}
           >
             <CardContent>
-              <Typography variant="h6" fontWeight={600} textAlign="center">
+              <Typography variant="h6" fontWeight={500} textAlign="center">
                 Profile
               </Typography>
               <Divider sx={{ my: 2 }} />
