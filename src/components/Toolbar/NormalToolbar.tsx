@@ -12,6 +12,7 @@ export default function NormalToolbar() {
     return {
       color: "text.primary",
       bgcolor: isActive ? "action.selected" : "transparent",
+      "&:hover": { bgcolor: "action.hover" },
     };
   }
 
