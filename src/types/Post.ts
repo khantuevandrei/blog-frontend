@@ -13,6 +13,8 @@ export interface Comment {
   author: Author;
 }
 
+export type Comments = Comment[];
+
 export interface Post {
   id: number;
   title: string;
