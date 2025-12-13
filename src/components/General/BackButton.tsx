@@ -1,14 +1,14 @@
 import { ArrowBack } from "@mui/icons-material";
 import { IconButton, useTheme } from "@mui/material";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
-export default function BackButton({ nav }: { nav: string }) {
+export default function BackButton() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <IconButton
-      component={Link}
-      to={nav}
+      onClick={() => navigate(-1)}
       sx={{
         position: "absolute",
         top: -60,
