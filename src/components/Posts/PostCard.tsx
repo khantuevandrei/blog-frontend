@@ -7,6 +7,7 @@ import {
   Box,
   Stack,
   Divider,
+  Avatar,
 } from "@mui/material";
 import { ChatBubbleOutline } from "@mui/icons-material";
 import { Link } from "react-router";
@@ -41,7 +42,12 @@ export default function PostCard({ post }: PostCardProps) {
           spacing={1.5}
           sx={{ justifyContent: "space-between", color: "text.secondary" }}
         >
-          <Typography variant="body2">by {post.author.username}</Typography>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Avatar sx={{ width: 28, height: 28 }}>
+              {post.author.username[0].toUpperCase()}
+            </Avatar>
+            <Typography variant="body2">{post.author.username}</Typography>
+          </Stack>
           <Typography variant="body2">
             {new Date(post.created_at).toLocaleDateString(undefined, {
               year: "numeric",
