@@ -48,11 +48,6 @@ export default function MyPosts() {
 
         setHasMore(data.length === 10);
         setOffset(data.length === 10 ? 10 : 0);
-
-        if (data.length === 10) {
-          setHasMore(true);
-          setOffset(10);
-        }
       } catch {
         setError("Network error");
       } finally {
