@@ -8,6 +8,7 @@ import {
   Divider,
   Box,
   CircularProgress,
+  Chip,
 } from "@mui/material";
 import { ChatBubbleOutline } from "@mui/icons-material";
 import { Link } from "react-router";
@@ -128,9 +129,12 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
           <Typography variant="body2">
             Created: {new Date(post.created_at).toLocaleDateString()}
           </Typography>
-          <Typography variant="body2">
-            {post.published ? "Published" : "Draft"}
-          </Typography>
+          <Chip
+            size="small"
+            label={post.published ? "Published" : "Draft"}
+            color={post.published ? "success" : "default"}
+            variant="outlined"
+          />
         </Stack>
         <Divider sx={{ my: 1.5 }} />
         <Typography
