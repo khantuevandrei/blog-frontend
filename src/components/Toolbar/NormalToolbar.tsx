@@ -1,5 +1,5 @@
 import { useAuth } from "../../hooks/useAuth";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Stack, Avatar, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router";
 import ThemeButton from "./ThemeButton";
 
@@ -69,15 +69,29 @@ export default function NormalToolbar() {
       >
         {user ? (
           <>
-            <Button
+            <Stack
               component={Link}
               to="/profile"
-              variant="text"
-              size="medium"
-              sx={getLinkStyle("/profile")}
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              sx={{
+                textDecoration: "none",
+                color: "text.primary",
+                cursor: "pointer",
+                "&:hover": {
+                  textDecoration: "none",
+                },
+                mx: 1,
+              }}
             >
-              Profile
-            </Button>
+              <Avatar sx={{ width: 28, height: 28 }}>
+                {user.username[0].toUpperCase()}
+              </Avatar>
+              <Typography variant="body2" fontWeight={500}>
+                {user.username}
+              </Typography>
+            </Stack>
             <Button onClick={logout} variant="contained" size="medium">
               Logout
             </Button>
