@@ -13,7 +13,10 @@ export interface Comment {
   author: Author;
 }
 
-export type Comments = Comment[];
+export interface Comments {
+  comments: Comment[];
+  total_comments: number;
+}
 
 export interface Post {
   id: number;
