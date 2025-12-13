@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import FormButton from "../../components/Forms/FormButton";
 import AlertMessage from "../../components/General/AlertMessage";
 import BodyField from "../../components/Forms/BodyField";
+import BackButton from "../../components/General/BackButton";
 
 export default function CreatePost() {
   const { token } = useAuth();
@@ -56,6 +57,7 @@ export default function CreatePost() {
 
   return (
     <Form width={600} name="Create post" onSubmit={handleSubmit}>
+      <BackButton />
       <TextField
         label="Title"
         name="title"

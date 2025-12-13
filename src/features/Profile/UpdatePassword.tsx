@@ -90,7 +90,7 @@ export default function UpdatePassword() {
 
   return (
     <Form width={400} name="Update password" onSubmit={handleSubmit}>
-      <BackButton nav={"/profile"} />
+      <BackButton />
       <PasswordField
         label="New password"
         name="password"

@@ -80,7 +80,7 @@ export default function UpdateUsername() {
 
   return (
     <Form width={400} name="Update username" onSubmit={handleSubmit}>
-      <BackButton nav={"/profile"} />
+      <BackButton />
       <TextField
         label="New username"
         name="username"

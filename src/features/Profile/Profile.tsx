@@ -13,6 +13,7 @@ import ConfirmDialog from "../../components/General/ConfirmDialog";
 import LinkButton from "../../components/General/LinkButton";
 import DefaultButton from "../../components/General/DefaultButton";
 import LoadingOverlay from "../../components/General/LoadingOverlay";
+import BackButton from "../../components/General/BackButton";
 
 export interface userInfoProps {
   id: number;
@@ -132,7 +133,8 @@ export default function Profile() {
       {!userInfo ? (
         <Typography>No user data</Typography>
       ) : (
-        <Box sx={{ flexGrow: 1, maxWidth: 400 }}>
+        <Box sx={{ flexGrow: 1, maxWidth: 400, position: "relative" }}>
+          <BackButton />
           <Card
             sx={{
               width: "100%",
