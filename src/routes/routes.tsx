@@ -9,6 +9,7 @@ import AllPosts from "../features/AllPosts/AllPosts";
 import MyPosts from "../features/MyPosts/MyPosts";
 import CreatePost from "../features/CreatePost/CreatePost";
 import EditPost from "../features/EditPost/EditPost";
+import Post from "../features/Post/Post";
 import RequireAuth from "../components/RouteWrappers/RequireAuth";
 
 const routes = [
@@ -76,6 +77,10 @@ const routes = [
             <EditPost />
           </RequireAuth>
         ),
+      },
+      {
+        path: "/posts/:postId",
+        element: <Post />,
       },
       {
         path: "*",
