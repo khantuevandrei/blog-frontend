@@ -124,7 +124,7 @@ export default function EditPost() {
 
   return (
     <Form width={600} name="Edit post" onSubmit={handleSubmit}>
-      <BackButton nav={`/posts/${postId}`} />
+      <BackButton />
       <TextField
         label="Title"
         name="title"

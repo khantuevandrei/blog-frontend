@@ -20,6 +20,7 @@ import LoadingOverlay from "../../components/General/LoadingOverlay";
 import Error from "../Error/Error";
 import Comments from "../../components/Posts/Comments";
 import AlertMessage from "../../components/General/AlertMessage";
+import BackButton from "../../components/General/BackButton";
 
 export default function Post() {
   const navigate = useNavigate();
@@ -229,8 +230,12 @@ export default function Post() {
           display: "flex",
           justifyContent: "center",
           flexGrow: 1,
+          position: "relative",
+          mt: { xs: 6 },
         }}
       >
+        <BackButton />
+
         <Card
           sx={{
             width: "100%",
@@ -240,6 +245,7 @@ export default function Post() {
             boxShadow: 3,
             bgcolor: "background.paper",
             transition: "0.2s",
+            position: "relative",
           }}
         >
           <CardContent>
@@ -301,7 +307,6 @@ export default function Post() {
               {post.body}
             </Typography>
           </CardContent>
-
           {/* Footer */}
           <CardActions
             sx={{
