@@ -22,6 +22,7 @@ import Comments from "../../components/Posts/Comments";
 import AlertMessage from "../../components/General/AlertMessage";
 import BackButton from "../../components/General/BackButton";
 import ConfirmDialog from "../../components/General/ConfirmDialog";
+import CreateComment from "../../components/Posts/CreateComment";
 
 export default function Post() {
   const navigate = useNavigate();
@@ -380,6 +381,18 @@ export default function Post() {
           <AlertMessage type="error" message={error} />
         </Card>
       </Box>
+      {user && (
+        <CreateComment
+          postId={post.id}
+          onSuccess={(newComment) => {
+            setComments((prev) => [newComment, ...prev]);
+            setPost((prev) =>
+              prev ? { ...prev, total_comments: prev.total_comments + 1 } : prev
+            );
+          }}
+        />
+      )}
+
       {post.total_comments > 0 && <Comments comments={comments} />}
       <Box ref={loaderRef} sx={{ height: "50px" }} />
       {loading.comments && (
