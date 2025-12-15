@@ -47,7 +47,7 @@ export default function CreatePost() {
         return;
       }
 
-      navigate(`/${data.id}`);
+      navigate(`/posts/${data.id}`);
     } catch {
       setError("Network error");
     } finally {
