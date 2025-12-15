@@ -247,6 +247,8 @@ export default function Post() {
           flexGrow: 1,
           position: "relative",
           mt: { xs: 6 },
+          maxWidth: "75ch",
+          width: "100%",
         }}
       >
         <BackButton />
