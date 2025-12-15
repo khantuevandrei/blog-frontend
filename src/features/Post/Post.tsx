@@ -21,6 +21,7 @@ import Error from "../Error/Error";
 import Comments from "../../components/Posts/Comments";
 import AlertMessage from "../../components/General/AlertMessage";
 import BackButton from "../../components/General/BackButton";
+import ConfirmDialog from "../../components/General/ConfirmDialog";
 
 export default function Post() {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ export default function Post() {
     delete: false,
     comments: false,
   });
+  const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 
   // Comments state for pagination
   const [comments, setComments] = useState<Comment[]>([]);
@@ -121,8 +123,20 @@ export default function Post() {
     }
   }
 
+  // Open dialog
+  function openConfirm() {
+    setConfirmOpen(true);
+  }
+
   // Delete post
   async function handleDelete() {
+    setConfirmOpen(false);
+
+    if (!post) {
+      setError("Post not found");
+      return;
+    }
+
     setLoading((prev) => ({ ...prev, delete: true }));
     setError(null);
 
@@ -348,7 +362,7 @@ export default function Post() {
                   )}
                 </Button>
                 <Button
-                  onClick={handleDelete}
+                  onClick={openConfirm}
                   size="small"
                   variant="contained"
                   disabled={loading.delete}
@@ -371,6 +385,13 @@ export default function Post() {
       {loading.comments && (
         <CircularProgress sx={{ display: "block", mx: "auto", mb: 8 }} />
       )}
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Delete Post"
+        text="Are you sure you want to delete your post? This action cannot be undone."
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={handleDelete}
+      />
     </Box>
   );
 }
