@@ -45,7 +45,13 @@ export default function Comments({ comments }: CommentsProps) {
               </Typography>
 
               <Typography variant="caption" color="text.secondary">
-                {new Date(comment.created_at).toLocaleDateString()}
+                {new Date(comment.created_at).toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </Typography>
             </Stack>
 
