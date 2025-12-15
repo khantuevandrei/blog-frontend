@@ -16,6 +16,7 @@ import type { Post } from "../../types/Post";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import AlertMessage from "../../components/General/AlertMessage";
+import ConfirmDialog from "../General/ConfirmDialog";
 
 interface MyPostCardProps {
   post: Post;
@@ -31,6 +32,7 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
       delete: false,
     }
   );
+  const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 
   // Toggle publish
   async function handlePublish() {
@@ -68,8 +70,20 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
     }
   }
 
+  // Open dialog
+  function openConfirm() {
+    setConfirmOpen(true);
+  }
+
   // Delete post
   async function handleDelete() {
+    setConfirmOpen(false);
+
+    if (!post) {
+      setError("Post not found");
+      return;
+    }
+
     setLoading((prev) => ({ ...prev, delete: true }));
     setError(null);
 
@@ -92,7 +106,7 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
         return;
       }
 
-      setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
+      setPosts((prev) => prev.filter((p) => p.id !== post.id));
     } catch {
       setError("Network error");
     } finally {
@@ -194,7 +208,7 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
             )}
           </Button>
           <Button
-            onClick={handleDelete}
+            onClick={openConfirm}
             size="small"
             variant="contained"
             disabled={loading.delete}
@@ -209,6 +223,13 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
         </Stack>
       </CardActions>
       <AlertMessage type="error" message={error} />
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Delete Post"
+        text="Are you sure you want to delete your post? This action cannot be undone."
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={handleDelete}
+      />
     </Card>
   );
 }
