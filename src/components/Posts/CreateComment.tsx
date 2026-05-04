@@ -26,7 +26,7 @@ export default function CreateComment({
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts/${postId}/comments`,
+        `https://blog-backend-895d.onrender.com/api/posts/${postId}/comments`,
         {
           method: "POST",
           headers: {
@@ -34,7 +34,7 @@ export default function CreateComment({
             Authorization: `bearer ${token}`,
           },
           body: JSON.stringify({ body }),
-        }
+        },
       );
 
       const data = await response.json();
