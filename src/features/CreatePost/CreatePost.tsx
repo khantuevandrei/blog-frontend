@@ -19,7 +19,7 @@ export default function CreatePost() {
   const [loading, setLoading] = useState<boolean>(false);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value.trim() }));
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
   async function handleSubmit(e: FormEvent) {
