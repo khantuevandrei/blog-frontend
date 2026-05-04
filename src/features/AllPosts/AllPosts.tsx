@@ -26,11 +26,11 @@ export default function AllPosts() {
 
       try {
         const response = await fetch(
-          `https://blog-backend-production-16f8.up.railway.app/api/posts`,
+          `https://blog-backend-895d.onrender.com/api/posts`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
-          }
+          },
         );
 
         if (!response.ok) {
@@ -69,11 +69,11 @@ export default function AllPosts() {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts?offset=${offset}`,
+        `https://blog-backend-895d.onrender.com/api/posts?offset=${offset}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -106,7 +106,7 @@ export default function AllPosts() {
           loadMore();
         }
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     const element = loaderRef.current;

@@ -35,14 +35,14 @@ export default function EditPost() {
 
       try {
         const response = await fetch(
-          `https://blog-backend-production-16f8.up.railway.app/api/posts/${postId}`,
+          `https://blog-backend-895d.onrender.com/api/posts/${postId}`,
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
               Authorization: `bearer ${token}`,
             },
-          }
+          },
         );
 
         if (!response.ok) {
@@ -89,7 +89,7 @@ export default function EditPost() {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts/${postId}`,
+        `https://blog-backend-895d.onrender.com/api/posts/${postId}`,
         {
           method: "PUT",
           headers: {
@@ -97,7 +97,7 @@ export default function EditPost() {
             Authorization: `bearer ${token}`,
           },
           body: JSON.stringify(form),
-        }
+        },
       );
 
       const data = await response.json();

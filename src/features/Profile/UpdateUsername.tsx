@@ -48,7 +48,7 @@ export default function UpdateUsername() {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/users/${user.id}`,
+        `https://blog-backend-895d.onrender.com/api/users/${user.id}`,
         {
           method: "PUT",
           headers: {
@@ -56,7 +56,7 @@ export default function UpdateUsername() {
             Authorization: `bearer ${token}`,
           },
           body: JSON.stringify(form),
-        }
+        },
       );
 
       const data = await response.json();

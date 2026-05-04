@@ -31,7 +31,7 @@ export default function Profile() {
     {
       profile: true,
       delete: false,
-    }
+    },
   );
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 
@@ -48,13 +48,13 @@ export default function Profile() {
 
       try {
         const response = await fetch(
-          `https://blog-backend-production-16f8.up.railway.app/api/users/${user.id}`,
+          `https://blog-backend-895d.onrender.com/api/users/${user.id}`,
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
-          }
+          },
         );
 
         const data = await response.json();
@@ -94,14 +94,14 @@ export default function Profile() {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/users/${user.id}`,
+        `https://blog-backend-895d.onrender.com/api/users/${user.id}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `bearer ${token}`,
           },
-        }
+        },
       );
 
       const data = await response.json();

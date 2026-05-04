@@ -25,7 +25,7 @@ export default function Register() {
   const usernameValidations = validateUsername(form.username);
   const passwordValidations = validatePassword(
     form.password,
-    form.confirmPassword
+    form.confirmPassword,
   );
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -49,12 +49,12 @@ export default function Register() {
 
     try {
       const response = await fetch(
-        "https://blog-backend-production-16f8.up.railway.app/api/auth/register",
+        "https://blog-backend-895d.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form),
-        }
+        },
       );
 
       const data = await response.json();

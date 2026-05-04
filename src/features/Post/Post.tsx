@@ -58,14 +58,14 @@ export default function Post() {
 
       try {
         const response = await fetch(
-          `https://blog-backend-production-16f8.up.railway.app/api/posts/${postId}`,
+          `https://blog-backend-895d.onrender.com/api/posts/${postId}`,
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
               Authorization: `bearer ${token}`,
             },
-          }
+          },
         );
 
         if (!response.ok) {
@@ -98,14 +98,14 @@ export default function Post() {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts/${postId}/publish`,
+        `https://blog-backend-895d.onrender.com/api/posts/${postId}/publish`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: `bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -143,14 +143,14 @@ export default function Post() {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts/${postId}`,
+        `https://blog-backend-895d.onrender.com/api/posts/${postId}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `bearer ${token}`,
           },
-        }
+        },
       );
 
       const data = await response.json();
@@ -176,11 +176,11 @@ export default function Post() {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts/${postId}/comments?offset=${offset}`,
+        `https://blog-backend-895d.onrender.com/api/posts/${postId}/comments?offset=${offset}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -213,7 +213,7 @@ export default function Post() {
           loadMore();
         }
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     const element = loaderRef.current;
@@ -389,7 +389,9 @@ export default function Post() {
           onSuccess={(newComment) => {
             setComments((prev) => [newComment, ...prev]);
             setPost((prev) =>
-              prev ? { ...prev, total_comments: prev.total_comments + 1 } : prev
+              prev
+                ? { ...prev, total_comments: prev.total_comments + 1 }
+                : prev,
             );
           }}
         />
