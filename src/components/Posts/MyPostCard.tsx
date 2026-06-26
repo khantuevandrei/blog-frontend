@@ -41,7 +41,7 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts/${post.id}/publish`,
+        `https://blog-backend-895d.onrender.com/api/posts/${post.id}/publish`,
         {
           method: "PATCH",
           headers: {
@@ -89,7 +89,7 @@ export default function MyPostCard({ post, setPosts }: MyPostCardProps) {
 
     try {
       const response = await fetch(
-        `https://blog-backend-production-16f8.up.railway.app/api/posts/${post.id}`,
+        `https://blog-backend-895d.onrender.com/api/posts/${post.id}`,
         {
           method: "DELETE",
           headers: {
